@@ -10,6 +10,7 @@ public:
 	Hand() : m_score{ 0 } { m_hand.reserve(8); }
 	void addCard(Card card) { m_hand.push_back(card); }
 	int getScore() { return m_score; }
+	bool canContinue() { return m_score < 21; }
 	void getTotal() {
 		m_score = 0;
 		int size = m_hand.size();
