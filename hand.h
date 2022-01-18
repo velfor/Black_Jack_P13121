@@ -1,32 +1,34 @@
 #pragma once
-#include "card.h"
 #include <vector>
+#include <iostream>
+#include "card.h"
 
 class Hand {
 protected:
-	std::vector<Card> m_hand;
-	int m_score;
+	std::vector<Card> hand;
+	int score;
 public:
-	Hand() : m_score{ 0 } { m_hand.reserve(8); }
-	void addCard(Card card) { m_hand.push_back(card); }
-	int getScore() { return m_score; }
-	bool canContinue() { return m_score < 21; }
-	void getTotal() {
-		m_score = 0;
-		int size = m_hand.size();
-		for (int i = 0; i < size; i++) {
-			if (m_hand[i].getRank() == Card::ACE) {
-				m_score += m_hand[i].getScore() + 10;
-				if (m_score > 21) m_score -= 10;
-			}
-			else m_score += m_hand[i].getScore();
-		}
-	}
+	Hand() :score{ 0 } 
+	{}
+	void addCard(Card card) {	hand.push_back(card); }
 	void printHand() {
-		int size = m_hand.size();
+		size_t size = hand.size();
 		for (int i = 0; i < size; i++) {
-			m_hand[i].printCard();
+			hand[i].printCard();
 		}
 		std::cout << std::endl;
 	}
+	void calculateScore() {
+		score = 0;
+		size_t size = hand.size();
+		for (int i = 0; i < size; i++) {
+			if (hand[i].getRank() == "A") {
+				score += hand[i].getScore() + 10;
+				if (score > 21) score -= 10;
+			}
+			else score += hand[i].getScore();
+		}
+	}
+	int getScore() { return score; }
+
 };

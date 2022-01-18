@@ -4,18 +4,13 @@
 
 class Dealer :public Hand {
 public:
-	Dealer() :Hand() {}
 	void play(Deck& deck) {
 		do {
-			Card tmp = deck.pop();
-			addCard(tmp);
+			addCard(deck.pop());
+			std::cout << "Dealer cards ";
 			printHand();
-			getTotal();
-			std::cout << m_score << std::endl;
-			if (m_score > 21) {
-				std::cout << "Dealer lose!" << std::endl;
-				return;
-			}
-		} while (m_score < 17);
+			calculateScore();
+			std::cout << "Dealer have " << getScore() << " points" << std::endl;
+		} while (score < 17);
 	}
 };
